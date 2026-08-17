@@ -55,6 +55,9 @@ a {
 */
 
 :root {
+  --font-display: 'Fraunces Variable', serif;
+  --font-body: 'Fira Sans Variable', sans-serif;
+
   --clr-white-100: #f5f5f5;
   --clr-black-100: #212121;
 }
@@ -62,4 +65,5 @@ a {
 body {
   background-color: var(--clr-white-100);
   color: var(--clr-black-100);
+  font-family: var(--font-body);
 }
