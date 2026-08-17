@@ -1,4 +1,53 @@
+# =================
+# Operating System
+# =================
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+
+# =================
+# Editors & IDEs
+# =================
+.vscode/
+*~
+
+# =================
+# Logs & Databases
+# =================
+*.log
+*.log*
+logs/
+
+# =================
+# Environment & Keys
+# =================
+.env
+.env.local
+.env.*.local
+
+# =================
+# Build & Dependencies
+# =================
+dist/
+build/
+node_modules/
+bun.lockb
+.vite/
+
+# =================
+# Maps & Caches
+# =================
+*.tsbuildinfo
 .sass-cache/
 *.css.map
 *.sass.map
 *.scss.map
+
+# ==============================================================================
+# Linters & Testing
+# ==============================================================================
+.eslintcache
+.prettiercache
+.stylelintcache
