@@ -1,0 +1,65 @@
+/* 
+# ============================================================
+# Reset Styles
+# ============================================================
+*/
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100vh;
+  line-height: 1.2;
+  -webkit-font-smoothing: antialiased;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* 
+# ============================================================
+# Root Styles
+# ============================================================
+*/
+
+:root {
+  --clr-white-100: #f5f5f5;
+  --clr-black-100: #212121;
+}
+
+body {
+  background-color: var(--clr-white-100);
+  color: var(--clr-black-100);
+}

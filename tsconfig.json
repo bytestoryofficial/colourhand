@@ -14,7 +14,7 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedIndexedAccess": true,
     "noImplicitOverride": true,
-    "noEmit": true,
+    "noEmit": true
   },
   "include": ["src"]
 }
