@@ -68,25 +68,29 @@ const animateBackgroundLineScaling = async (
   backgroundWrapperElement: HTMLElement,
   navLeftElement: HTMLElement,
   navRightElement: HTMLElement,
+  handElement: HTMLElement,
+  handDecoded: Promise<void>,
 ): Promise<void> => {
   // --- unload preload title & percent elements ---
   await animate(
     [logoElement, percentElement],
     { opacity: [1, 0], y: [0, -18] },
-    { duration: 0.6, ease: [0.4, 0, 1, 1] },
+    { duration: 0.5, ease: [0.4, 0, 1, 1] },
   ).finished;
 
   // --- animate fade bg-line ---
   const fadePreloader = animate(
     preloaderElement,
     { opacity: [1, 0] },
-    { duration: 0.5, ease: [0.4, 0, 0.2, 1] },
+    { duration: 0.4, ease: [0.4, 0, 0.2, 1] },
   ).finished;
 
   // --- bg-line full scaling animation [phase 1. left-right, phase 2. top-bottom] ---
   const naturalHeight = backgroundWrapperElement.offsetHeight;
   const LINE_PX = 2;
   const thinScaleY = LINE_PX / naturalHeight;
+
+  await handDecoded;
 
   // phase 1
   await animate(
@@ -98,6 +102,7 @@ const animateBackgroundLineScaling = async (
   // phase 2
   const PHASE_2_DURATION = 0.75;
   const NAV_DELAY_INTO_PHASE_2 = 0.5;
+  const HAND_DELAY_INTO_PHASE_2 = 0.85;
 
   const scaleLine = animate(
     backgroundWrapperElement,
@@ -110,15 +115,42 @@ const animateBackgroundLineScaling = async (
     [navLeftElement, navRightElement],
     { y: [-16, 0], opacity: [0, 1] },
     {
-      duration: 0.85,
+      duration: 0.75,
       delay: stagger(0.08, { startDelay: NAV_DELAY_INTO_PHASE_2 }),
       ease: [0.25, 1, 0.36, 1],
     },
   ).finished;
 
-  await Promise.all([fadePreloader, scaleLine, revealNavigation]);
+  // --- animate hand ---
+  const revealHand = animate(
+    handElement,
+    { opacity: [0, 1], x: [-60, 0] },
+    {
+      duration: 0.8,
+      delay: HAND_DELAY_INTO_PHASE_2,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  ).finished;
+
+  await Promise.all([fadePreloader, scaleLine, revealNavigation, revealHand]);
   preloaderElement.remove();
 };
 
-export { animateBackgroundLineScaling, animateCountPercentUp };
+/*
+ @Animation function for fade-in hand selector
+ */
+const animateHandFade = async (handElement: HTMLElement): Promise<void> => {
+  if (isReducedAnimation) {
+    handElement.style.opacity = '1';
+    return Promise.resolve();
+  }
+
+  return await animate(
+    handElement,
+    { opacity: [0, 1], x: [-100, 0] },
+    { duration: 1.25, ease: [0.22, 1, 0.36, 1] },
+  ).finished;
+};
+
+export { animateBackgroundLineScaling, animateCountPercentUp, animateHandFade };
 export default animatePreloaderText;

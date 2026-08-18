@@ -11,6 +11,7 @@ import * as SELECTORS from './helpers/constants';
 import type { HTMLElementNull } from './helpers/types';
 
 import './style.css';
+import { decodedImage } from './components/dom';
 
 const init = async () => {
   const logoElement: HTMLElementNull = document.querySelector(
@@ -31,6 +32,9 @@ const init = async () => {
   const navRightElement: HTMLElementNull = document.querySelector(
     SELECTORS.NAV_RIGHT_SELECTOR,
   );
+  const handImageElement: HTMLElementNull = document.querySelector(
+    SELECTORS.HAND_IMAGE_SELECTOR,
+  );
 
   if (
     logoElement &&
@@ -38,7 +42,8 @@ const init = async () => {
     preloaderElement &&
     bgWrapperElement &&
     navLeftElement &&
-    navRightElement
+    navRightElement &&
+    handImageElement
   ) {
     await animatePreloaderText(logoElement, percentElement);
     await animateCountPercentUp(percentElement);
@@ -49,6 +54,8 @@ const init = async () => {
       bgWrapperElement,
       navLeftElement,
       navRightElement,
+      handImageElement,
+      decodedImage,
     );
   }
 

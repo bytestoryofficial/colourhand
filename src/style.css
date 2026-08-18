@@ -166,14 +166,20 @@ body {
   transform-origin: 50% 50%;
 }
 
-.hand-img {
+.hand-img-wrap {
   position: absolute;
   left: 0px;
   top: 50%;
-  width: min(78vw, 1500px);
+  width: min(78vw, 900px);
   transform: translateY(-50%);
+}
+
+.hand-img {
   isolation: isolate;
   filter: drop-shadow(0 34px 44px rgba(0, 0, 0, 0.2));
+
+  /*-- animation state -- */
+  opacity: 0;
 }
 
 .hand-img::after {
