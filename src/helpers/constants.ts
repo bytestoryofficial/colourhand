@@ -11,3 +11,4 @@ export const BG_WRAPPER_SELECTOR = '#bg-wrapper';
 export const NAV_LEFT_SELECTOR = '.nav-left';
 export const NAV_RIGHT_SELECTOR = '.nav-right';
 export const HAND_IMAGE_SELECTOR = '.hand-img';
+export const PANEL_SELECTOR = '.panel';

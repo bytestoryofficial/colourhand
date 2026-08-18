@@ -61,7 +61,7 @@ const animateCountPercentUp = (percentElement: HTMLElement): Promise<void> => {
 /*
  @Animation function growing main wrapper from line to background 
  */
-const animateBackgroundLineScaling = async (
+const animateIntroPage = async (
   preloaderElement: HTMLElement,
   logoElement: HTMLElement,
   percentElement: HTMLElement,
@@ -70,6 +70,7 @@ const animateBackgroundLineScaling = async (
   navRightElement: HTMLElement,
   handElement: HTMLElement,
   handDecoded: Promise<void>,
+  panelElement: HTMLElement,
 ): Promise<void> => {
   // --- unload preload title & percent elements ---
   await animate(
@@ -103,6 +104,7 @@ const animateBackgroundLineScaling = async (
   const PHASE_2_DURATION = 0.75;
   const NAV_DELAY_INTO_PHASE_2 = 0.5;
   const HAND_DELAY_INTO_PHASE_2 = 0.85;
+  const PANEL_DELAY_INTO_PHASE_2 = 0.95;
 
   const scaleLine = animate(
     backgroundWrapperElement,
@@ -132,25 +134,35 @@ const animateBackgroundLineScaling = async (
     },
   ).finished;
 
-  await Promise.all([fadePreloader, scaleLine, revealNavigation, revealHand]);
-  preloaderElement.remove();
-};
+  // -- animate panel --
+  const panelRows = Array.from(panelElement.children) as HTMLElement[];
 
-/*
- @Animation function for fade-in hand selector
- */
-const animateHandFade = async (handElement: HTMLElement): Promise<void> => {
   if (isReducedAnimation) {
-    handElement.style.opacity = '1';
+    panelRows.forEach((row) => {
+      row.style.opacity = '1';
+    });
     return Promise.resolve();
   }
 
-  return await animate(
-    handElement,
-    { opacity: [0, 1], x: [-100, 0] },
-    { duration: 1.25, ease: [0.22, 1, 0.36, 1] },
+  const panelFadeOut = animate(
+    panelRows,
+    { y: [16, 0], opacity: [0, 1] },
+    {
+      duration: 0.5,
+      delay: stagger(0.08, { startDelay: PANEL_DELAY_INTO_PHASE_2 }),
+      ease: [0.22, 1, 0.36, 1],
+    },
   ).finished;
+
+  await Promise.all([
+    fadePreloader,
+    scaleLine,
+    revealNavigation,
+    revealHand,
+    panelFadeOut,
+  ]);
+  preloaderElement.remove();
 };
 
-export { animateBackgroundLineScaling, animateCountPercentUp, animateHandFade };
+export { animateCountPercentUp, animateIntroPage };
 export default animatePreloaderText;

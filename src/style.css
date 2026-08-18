@@ -60,7 +60,7 @@ a {
 
   --clr-white-100: #f5f5f5;
   --clr-black-100: #212121;
-  --clr-mask: #0f1412;
+  --clr-mask: #2a3170;
 
   --font-size-subtitle: 36px;
   --font-size-logo: 24px;
@@ -112,7 +112,7 @@ body {
   font-style: italic;
   font-weight: 500;
   font-size: var(--font-size-subtitle);
-  color: var(--clr-black-100);
+  color: var(--clr-mask);
   letter-spacing: -0.01em;
 
   /*-- animation state -- */
@@ -269,7 +269,7 @@ body {
 
 .panel {
   position: absolute;
-  right: 6vw;
+  right: 10vw;
   top: 50%;
   transform: translateY(-50%);
   z-index: 2;
@@ -329,4 +329,11 @@ body {
 
 .panel-generate:active {
   transform: scale(0.97);
+}
+
+.panel-eyebrow,
+.panel-hex,
+.panel-swatches,
+.panel-generate {
+  opacity: 0;
 }

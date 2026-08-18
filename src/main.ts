@@ -2,8 +2,8 @@ import '@fontsource-variable/fraunces/full-italic.css';
 import '@fontsource/fira-sans';
 
 import animatePreloaderText, {
-  animateBackgroundLineScaling,
   animateCountPercentUp,
+  animateIntroPage,
 } from './components/intro';
 import './components/dom';
 
@@ -35,6 +35,9 @@ const init = async () => {
   const handImageElement: HTMLElementNull = document.querySelector(
     SELECTORS.HAND_IMAGE_SELECTOR,
   );
+  const panelElement: HTMLElementNull = document.querySelector(
+    SELECTORS.PANEL_SELECTOR,
+  );
 
   if (
     logoElement &&
@@ -43,11 +46,12 @@ const init = async () => {
     bgWrapperElement &&
     navLeftElement &&
     navRightElement &&
-    handImageElement
+    handImageElement &&
+    panelElement
   ) {
     await animatePreloaderText(logoElement, percentElement);
     await animateCountPercentUp(percentElement);
-    await animateBackgroundLineScaling(
+    await animateIntroPage(
       preloaderElement,
       logoElement,
       percentElement,
@@ -56,6 +60,7 @@ const init = async () => {
       navRightElement,
       handImageElement,
       decodedImage,
+      panelElement,
     );
   }
 
