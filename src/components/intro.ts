@@ -17,14 +17,14 @@ const animatePreloaderText = (
 
   animate(
     logoElement,
-    { opacity: [0, 1], y: [30, 0] },
-    { duration: 1, ease: [0.22, 1, 0.36, 1] },
+    { opacity: [0, 1], y: [24, 0] },
+    { duration: 1.5, ease: [0.22, 1, 0.36, 1] },
   );
 
   return animate(
     percentElement,
     { opacity: [0, 1], y: [18, 0] },
-    { duration: 0.5, delay: 0.2, ease: [0.22, 1, 0.36, 1] },
+    { duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] },
   ).finished;
 };
 

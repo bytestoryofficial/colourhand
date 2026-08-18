@@ -114,7 +114,7 @@ body {
 
   /*-- animation state -- */
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(24px);
 }
 
 .loader-percent {
