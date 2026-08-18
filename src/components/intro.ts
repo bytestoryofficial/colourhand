@@ -1,6 +1,6 @@
 import { animate } from 'motion';
 
-import { isReducedAnimation } from '../constants/core';
+import { isReducedAnimation } from '../helpers/constants';
 
 /*
  @Animation function for reveal Title and Percent in preloader wrapper
@@ -48,7 +48,7 @@ const animateCountPercentUp = (percentElement: HTMLElement): Promise<void> => {
       const rawPercent = Math.round(progress * 100);
       const percent = Math.min(100, rawPercent);
 
-      percentElement.textContent = `${percent} %`;
+      percentElement.textContent = `${percent}%`;
 
       if (elapsed < duration) requestAnimationFrame(percentTick);
       else resolve();
@@ -58,5 +58,49 @@ const animateCountPercentUp = (percentElement: HTMLElement): Promise<void> => {
   });
 };
 
-export { animateCountPercentUp };
+/*
+ @Animation function growing main wrapper from line to background 
+ */
+const animateBackgroundLineScaling = async (
+  preloaderElement: HTMLElement,
+  logoElement: HTMLElement,
+  percentElement: HTMLElement,
+  backgroundWrapperElement: HTMLElement,
+): Promise<void> => {
+  // --- unload preload title & percent elements ---
+  await animate(
+    [logoElement, percentElement],
+    { opacity: [1, 0], y: [0, -18] },
+    { duration: 0.6, ease: [0.4, 0, 1, 1] },
+  ).finished;
+
+  // --- animate fade bg-line ---
+  const fadePreloader = animate(
+    preloaderElement,
+    { opacity: [1, 0] },
+    { duration: 0.5, ease: [0.4, 0, 0.2, 1] },
+  ).finished;
+
+  // --- bg-line full scaling animation [1. left-right, 2. top-bottom] ---
+  const naturalHeight = backgroundWrapperElement.offsetHeight;
+  const LINE_PX = 2;
+  const thinScaleY = LINE_PX / naturalHeight;
+
+  await animate(
+    backgroundWrapperElement,
+    { scaleX: [0.05, 1], scaleY: [thinScaleY, thinScaleY] },
+    { duration: 0.5, ease: [0.65, 0, 0.35, 1] },
+  ).finished;
+
+  await animate(
+    backgroundWrapperElement,
+    { scaleX: [1, 1], scaleY: [thinScaleY, 1] },
+    { duration: 0.75, ease: [0.76, 0, 0.24, 1] },
+  ).finished;
+
+  await fadePreloader;
+  preloaderElement.remove();
+};
+
+export { animateBackgroundLineScaling, animateCountPercentUp };
 export default animatePreloaderText;

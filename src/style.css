@@ -73,6 +73,8 @@ a {
   --font-lh-links: 1.2;
 
   --space-md: 12px;
+
+  --rd-md: 16px;
 }
 
 body {
@@ -121,6 +123,7 @@ body {
   font-family: var(--font-body);
   font-size: var(--font-size-small);
   font-weight: 500;
+  letter-spacing: var(--ltr-spacing-text);
   color: var(--clr-black-100);
 
   /*-- animation state -- */
@@ -154,8 +157,12 @@ body {
   background-color: var(--clr-mask);
   height: 100%;
   width: 100%;
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
+  border-top-left-radius: var(--rd-md);
+  border-top-right-radius: var(--rd-md);
+
+  /*-- animation state -- */
+  transform: scale(0.1, 0.002);
+  transform-origin: 50% 50%;
 }
 
 .hand-img {
