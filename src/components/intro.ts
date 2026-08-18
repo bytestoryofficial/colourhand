@@ -1,4 +1,4 @@
-import { animate } from 'motion';
+import { animate, stagger } from 'motion';
 
 import { isReducedAnimation } from '../helpers/constants';
 
@@ -66,6 +66,8 @@ const animateBackgroundLineScaling = async (
   logoElement: HTMLElement,
   percentElement: HTMLElement,
   backgroundWrapperElement: HTMLElement,
+  navLeftElement: HTMLElement,
+  navRightElement: HTMLElement,
 ): Promise<void> => {
   // --- unload preload title & percent elements ---
   await animate(
@@ -81,24 +83,40 @@ const animateBackgroundLineScaling = async (
     { duration: 0.5, ease: [0.4, 0, 0.2, 1] },
   ).finished;
 
-  // --- bg-line full scaling animation [1. left-right, 2. top-bottom] ---
+  // --- bg-line full scaling animation [phase 1. left-right, phase 2. top-bottom] ---
   const naturalHeight = backgroundWrapperElement.offsetHeight;
   const LINE_PX = 2;
   const thinScaleY = LINE_PX / naturalHeight;
 
+  // phase 1
   await animate(
     backgroundWrapperElement,
     { scaleX: [0.05, 1], scaleY: [thinScaleY, thinScaleY] },
     { duration: 0.5, ease: [0.65, 0, 0.35, 1] },
   ).finished;
 
-  await animate(
+  // phase 2
+  const PHASE_2_DURATION = 0.75;
+  const NAV_DELAY_INTO_PHASE_2 = 0.5;
+
+  const scaleLine = animate(
     backgroundWrapperElement,
     { scaleX: [1, 1], scaleY: [thinScaleY, 1] },
-    { duration: 0.75, ease: [0.76, 0, 0.24, 1] },
+    { duration: PHASE_2_DURATION, ease: [0.76, 0, 0.24, 1] },
   ).finished;
 
-  await fadePreloader;
+  // --- animate navigation ---
+  const revealNavigation = animate(
+    [navLeftElement, navRightElement],
+    { y: [-16, 0], opacity: [0, 1] },
+    {
+      duration: 0.85,
+      delay: stagger(0.08, { startDelay: NAV_DELAY_INTO_PHASE_2 }),
+      ease: [0.25, 1, 0.36, 1],
+    },
+  ).finished;
+
+  await Promise.all([fadePreloader, scaleLine, revealNavigation]);
   preloaderElement.remove();
 };
 

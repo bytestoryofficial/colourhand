@@ -8,24 +8,38 @@ import animatePreloaderText, {
 import './components/dom';
 
 import * as SELECTORS from './helpers/constants';
+import type { HTMLElementNull } from './helpers/types';
 
 import './style.css';
 
 const init = async () => {
-  const logoElement: HTMLElement | null = document.querySelector(
+  const logoElement: HTMLElementNull = document.querySelector(
     SELECTORS.LOADER_LOGO_SELECTOR,
   );
-  const percentElement: HTMLElement | null = document.querySelector(
+  const percentElement: HTMLElementNull = document.querySelector(
     SELECTORS.LOADER_PERCENT_SELECTOR,
   );
-  const preloaderElement: HTMLElement | null = document.querySelector(
+  const preloaderElement: HTMLElementNull = document.querySelector(
     SELECTORS.PRELOADER_SELECTOR,
   );
-  const bgWrapperElement: HTMLElement | null = document.querySelector(
+  const bgWrapperElement: HTMLElementNull = document.querySelector(
     SELECTORS.BG_WRAPPER_SELECTOR,
   );
+  const navLeftElement: HTMLElementNull = document.querySelector(
+    SELECTORS.NAV_LEFT_SELECTOR,
+  );
+  const navRightElement: HTMLElementNull = document.querySelector(
+    SELECTORS.NAV_RIGHT_SELECTOR,
+  );
 
-  if (logoElement && percentElement && preloaderElement && bgWrapperElement) {
+  if (
+    logoElement &&
+    percentElement &&
+    preloaderElement &&
+    bgWrapperElement &&
+    navLeftElement &&
+    navRightElement
+  ) {
     await animatePreloaderText(logoElement, percentElement);
     await animateCountPercentUp(percentElement);
     await animateBackgroundLineScaling(
@@ -33,6 +47,8 @@ const init = async () => {
       logoElement,
       percentElement,
       bgWrapperElement,
+      navLeftElement,
+      navRightElement,
     );
   }
 
