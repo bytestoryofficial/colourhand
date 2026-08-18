@@ -12,3 +12,5 @@ export const NAV_LEFT_SELECTOR = '.nav-left';
 export const NAV_RIGHT_SELECTOR = '.nav-right';
 export const HAND_IMAGE_SELECTOR = '.hand-img';
 export const PANEL_SELECTOR = '.panel';
+export const GENERATE_BTN_SELECTOR = '#generate-btn';
+export const HEX_SELECTOR = '#hex-value';
