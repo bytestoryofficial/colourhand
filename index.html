@@ -31,9 +31,23 @@
         </header>
 
        <div class="main-wrapper">
-            <div class="bg-wrapper"></div>
+            <div class="bg-wrapper">
+                <div class="hand-img"><img id="hero-hand-image" src aria-label="hand-img"/></div>
+            </div>
+
+            <div class="panel">
+                <p class="panel-eyebrow ink">Generated Shade</p>
+                <p class="panel-hex ink" id="hex-value">#42ABE3</p>
+
+                <div class="panel-swatches" id="swatches"></div>
+
+                <button class="panel-generate" id="generate-btn" type="button">
+                    Generate
+                </button>
+            </div>
        </div>
     </div>
     <script type="module" src="/src/main.ts"></script>
+    <script type="module" src="/src/dom.ts"></script>
 </body>
 </html>

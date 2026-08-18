@@ -60,19 +60,25 @@ a {
 
   --clr-white-100: #f5f5f5;
   --clr-black-100: #212121;
+  --clr-mask: #68507b;
 
   --font-size-logo: 24px;
   --font-size-menu: 15px;
 
   --ltr-spacing-menu: 0.02em;
 
-  --font-lh-links: 1.2,;
+  --font-lh-links: 1.2;
 }
 
 body {
   background-color: var(--clr-white-100);
   color: var(--clr-black-100);
   font-family: var(--font-body);
+}
+
+.ink {
+  color: #fff;
+  mix-blend-mode: difference;
 }
 
 /* 
@@ -85,18 +91,52 @@ body {
   position: relative;
   height: 100vh;
   width: 100vw;
+  display: flex;
+  flex-direction: column;
 }
 
 .main-wrapper {
   width: 100%;
-  height: calc(100% - 80px);
+  height: 100%;
   padding: 0px 30px 30px 30px;
+  overflow: hidden;
 }
 
 .bg-wrapper {
-  background-color: #211e1e;
+  position: relative;
+  background-color: var(--clr-mask);
   height: 100%;
   width: 100%;
+  border-radius: 16px;
+}
+
+.hand-img {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: min(78vw, 1300px);
+  transform: translateY(-50%);
+  isolation: isolate;
+  filter: drop-shadow(0 34px 44px rgba(0, 0, 0, 0.35));
+}
+
+.hand-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--clr-mask);
+  mix-blend-mode: color;
+  -webkit-mask-image: var(--hand-mask);
+  mask-image: var(--hand-mask);
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  user-select: none;
+}
+
+.hand-img img {
+  filter: contrast(1.05) brightness(1.03);
 }
 
 /* 
@@ -151,4 +191,74 @@ body {
   border-radius: 50%;
   border: 1px solid var(--clr-black-100);
   color: var(--clr-black-100);
+}
+
+/* 
+# ============================================================
+# Panel
+# ============================================================
+*/
+
+.panel {
+  position: absolute;
+  right: 6vw;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 20px;
+  text-align: right;
+}
+
+.panel-eyebrow {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.panel-hex {
+  margin: 0;
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  line-height: 1;
+}
+
+.panel-swatches {
+  display: flex;
+  gap: 12px;
+}
+
+.panel-swatches button {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+.panel-generate {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: transparent;
+  border: 1px solid #fff;
+  color: #fff;
+  mix-blend-mode: difference;
+  padding: 14px 28px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.panel-generate:active {
+  transform: scale(0.97);
 }
