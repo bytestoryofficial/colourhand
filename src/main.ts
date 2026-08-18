@@ -11,9 +11,32 @@ import * as SELECTORS from './helpers/constants';
 import type { HTMLElementNull } from './helpers/types';
 
 import './style.css';
-import { applyGeneratedColor, decodedImage } from './components/dom';
+import {
+  applyGeneratedColor,
+  applyInitColor,
+  decodedImage,
+} from './components/dom';
 
 const init = async () => {
+  // ------------- HTML SELECTORS FOR WORK -------------
+  const generateBtnSelector = document.querySelector<HTMLButtonElement>(
+    SELECTORS.GENERATE_BTN_SELECTOR,
+  );
+  const hexSelector = document.querySelector<HTMLElement>(
+    SELECTORS.HEX_SELECTOR,
+  );
+  const codesElement = document.querySelector<HTMLElement>(
+    SELECTORS.CODES_SELECTOR,
+  );
+
+  if (hexSelector && codesElement) applyInitColor(hexSelector, codesElement);
+
+  if (generateBtnSelector && hexSelector && codesElement) {
+    generateBtnSelector.addEventListener('click', () => {
+      applyGeneratedColor(hexSelector, codesElement);
+    });
+  }
+
   // ------------- HTML SELECTORS FOR ANIMATION -------------
   const logoElement: HTMLElementNull = document.querySelector(
     SELECTORS.LOADER_LOGO_SELECTOR,
@@ -40,14 +63,6 @@ const init = async () => {
     SELECTORS.PANEL_SELECTOR,
   );
 
-  // ------------- HTML SELECTORS FOR WORK -------------
-  const generateBtnSelector = document.querySelector<HTMLButtonElement>(
-    SELECTORS.GENERATE_BTN_SELECTOR,
-  );
-  const hexSelector = document.querySelector<HTMLElement>(
-    SELECTORS.HEX_SELECTOR,
-  );
-
   if (
     logoElement &&
     percentElement &&
@@ -71,12 +86,6 @@ const init = async () => {
       decodedImage,
       panelElement,
     );
-  }
-
-  if (generateBtnSelector && hexSelector) {
-    generateBtnSelector.addEventListener('click', () => {
-      applyGeneratedColor(hexSelector);
-    });
   }
 
   return Promise.resolve();

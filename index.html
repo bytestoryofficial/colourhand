@@ -45,8 +45,20 @@
 
             <div class="panel">
                 <p class="panel-eyebrow ink">Generated Shade</p>
-                <p class="panel-hex ink" id="hex-value">#42ABE3</p>
 
+                 <div class="panel-hex-row">
+                    <div class="panel-hex ink" id="hex-value">#0F1412</div>
+                    <button class="panel-copy" id="copy-btn" type="button" aria-label="Скопировать HEX">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2"/>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                        </svg>
+                        <span id="copy-btn-label">Copy</span>
+                    </button>
+                </div>
+
+                <p class="panel-codes ink" id="color-codes">RGB 15, 20, 18   HSL 158, 14%, 7%</p>
+        
                 <div class="panel-swatches" id="swatches"></div>
 
                 <button class="panel-generate" id="generate-btn" type="button">

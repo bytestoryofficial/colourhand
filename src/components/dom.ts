@@ -1,6 +1,6 @@
 import handImageUrl from '../assets/hand.png';
 
-import randomHex from '../helpers/color';
+import randomHex, { formatColorCodes } from '../helpers/color';
 
 const handElement = document.querySelector<HTMLDivElement>('.hand-img');
 const handImage = document.querySelector<HTMLImageElement>('#hero-hand-image');
@@ -19,10 +19,29 @@ if (handImage && handElement) {
 /**
  * @Function for generate random color
  */
-const applyGeneratedColor = (hexValueElement: HTMLElement): void => {
-  const newColor = randomHex();
+const applyGeneratedColor = (
+  hexValueElement: HTMLElement,
+  codesElement: HTMLElement,
+): void => {
+  const newColor: string = randomHex();
   document.documentElement.style.setProperty('--clr-mask', newColor);
   hexValueElement.textContent = newColor;
+  codesElement.textContent = formatColorCodes(newColor);
 };
 
-export { applyGeneratedColor, decodedImage };
+/**
+ * @Function for init color
+ */
+const applyInitColor = (
+  hexValueElement: HTMLElement,
+  codesElement: HTMLElement,
+): void => {
+  const initialColor: string = getComputedStyle(document.documentElement)
+    .getPropertyValue('--clr-mask')
+    .trim();
+
+  hexValueElement.textContent = initialColor.toUpperCase();
+  codesElement.textContent = formatColorCodes(initialColor);
+};
+
+export { applyGeneratedColor, applyInitColor, decodedImage };

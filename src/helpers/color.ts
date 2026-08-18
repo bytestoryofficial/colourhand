@@ -28,6 +28,53 @@ const hslToHex = (
 };
 
 /**
+ * @Function for HEX to RGB
+ */
+export const hexToRgb = (hex: string): [number, number, number] => {
+  const normalized: string = hex.replace('#', '');
+  const r: number = parseInt(normalized.substring(0, 2), 16);
+  const g: number = parseInt(normalized.substring(2, 4), 16);
+  const b: number = parseInt(normalized.substring(4, 6), 16);
+  return [r, g, b];
+};
+
+/**
+ * @Function for RGB to HSL
+ */
+export const rgbToHsl = (
+  r: number,
+  g: number,
+  b: number,
+): [number, number, number] => {
+  const rNorm: number = r / 255;
+  const gNorm: number = g / 255;
+  const bNorm: number = b / 255;
+
+  const max: number = Math.max(rNorm, gNorm, bNorm);
+  const min: number = Math.min(rNorm, gNorm, bNorm);
+  const delta: number = max - min;
+
+  let hue: number = 0;
+  if (delta !== 0) {
+    if (max === rNorm) {
+      hue = ((gNorm - bNorm) / delta) % 6;
+    } else if (max === gNorm) {
+      hue = (bNorm - rNorm) / delta + 2;
+    } else {
+      hue = (rNorm - gNorm) / delta + 4;
+    }
+    hue = Math.round(hue * 60);
+    if (hue < 0) hue += 360;
+  }
+
+  const lightness: number = (max + min) / 2;
+  const saturation: number =
+    delta === 0 ? 0 : delta / (1 - Math.abs(2 * lightness - 1));
+
+  return [hue, Math.round(saturation * 100), Math.round(lightness * 100)];
+};
+
+/**
  * @Function for randomize HEX color
  */
 const randomHex = (): string => {
@@ -36,6 +83,15 @@ const randomHex = (): string => {
   const lightness: number = 42 + Math.random() * 26;
 
   return hslToHex(hue, saturation, lightness);
+};
+
+/**
+ * @Function for formatting colors
+ */
+export const formatColorCodes = (hex: string): string => {
+  const [r, g, b] = hexToRgb(hex);
+  const [h, s, l] = rgbToHsl(r, g, b);
+  return `RGB ${r}, ${g}, ${b}   HSL ${h}, ${s}%, ${l}%`;
 };
 
 export default randomHex;
