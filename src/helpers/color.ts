@@ -91,7 +91,7 @@ const randomHex = (): string => {
 export const formatColorCodes = (hex: string): string => {
   const [r, g, b] = hexToRgb(hex);
   const [h, s, l] = rgbToHsl(r, g, b);
-  return `RGB ${r}, ${g}, ${b}   HSL ${h}, ${s}%, ${l}%`;
+  return `<span>RGB ${r}, ${g}, ${b}</span>/<span>HSL ${h}, ${s}%, ${l}%</span>`;
 };
 
 export default randomHex;

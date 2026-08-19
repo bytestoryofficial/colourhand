@@ -26,7 +26,7 @@ const applyGeneratedColor = (
   const newColor: string = randomHex();
   document.documentElement.style.setProperty('--clr-mask', newColor);
   hexValueElement.textContent = newColor;
-  codesElement.textContent = formatColorCodes(newColor);
+  codesElement.innerHTML = formatColorCodes(newColor);
 };
 
 /**
@@ -41,7 +41,7 @@ const applyInitColor = (
     .trim();
 
   hexValueElement.textContent = initialColor.toUpperCase();
-  codesElement.textContent = formatColorCodes(initialColor);
+  codesElement.innerHTML = formatColorCodes(initialColor);
 };
 
 export { applyGeneratedColor, applyInitColor, decodedImage };
