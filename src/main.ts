@@ -80,6 +80,9 @@ const init = async () => {
   const panelElement: HTMLElementNull = document.querySelector(
     SELECTORS.PANEL_SELECTOR,
   );
+  const dotsElement: HTMLElementNull = document.querySelector(
+    SELECTORS.DOTS_SELECTOR,
+  );
 
   if (
     logoElement &&
@@ -89,7 +92,8 @@ const init = async () => {
     navLeftElement &&
     navRightElement &&
     handImageElement &&
-    panelElement
+    panelElement &&
+    dotsElement
   ) {
     await animatePreloaderText(logoElement, percentElement);
     await animateCountPercentUp(percentElement);
@@ -103,6 +107,7 @@ const init = async () => {
       handImageElement,
       decodedImage,
       panelElement,
+      dotsElement,
     );
   }
 

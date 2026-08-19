@@ -71,6 +71,7 @@ const animateIntroPage = async (
   handElement: HTMLElement,
   handDecoded: Promise<void>,
   panelElement: HTMLElement,
+  dotsElement: HTMLElement,
 ): Promise<void> => {
   // --- unload preload title & percent elements ---
   await animate(
@@ -105,6 +106,7 @@ const animateIntroPage = async (
   const NAV_DELAY_INTO_PHASE_2 = 0.85;
   const HAND_DELAY_INTO_PHASE_2 = 0.9;
   const PANEL_DELAY_INTO_PHASE_2 = 0.95;
+  const DOTS_DELAY_INTO_PHASE_2 = 1.05;
 
   const scaleLine = animate(
     backgroundWrapperElement,
@@ -154,12 +156,19 @@ const animateIntroPage = async (
     },
   ).finished;
 
+  const dotsFade = animate(
+    dotsElement,
+    { opacity: [0, 0.14] },
+    { duration: 0.5, delay: DOTS_DELAY_INTO_PHASE_2, ease: [0.65, 0, 0.35, 1] },
+  ).finished;
+
   await Promise.all([
     fadePreloader,
     scaleLine,
     revealHand,
     revealNavigation,
     panelFadeOut,
+    dotsFade,
   ]);
   preloaderElement.remove();
 };
