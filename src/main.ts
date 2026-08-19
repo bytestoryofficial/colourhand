@@ -1,6 +1,7 @@
 import '@fontsource-variable/fraunces/full-italic.css';
 import '@fontsource/fira-sans';
 
+import { animateParallaxHand } from './components/effects';
 import animatePreloaderText, {
   animateCountPercentUp,
   animateIntroPage,
@@ -101,6 +102,8 @@ const init = async () => {
       panelElement,
     );
   }
+
+  animateParallaxHand();
 
   return Promise.resolve();
 };
