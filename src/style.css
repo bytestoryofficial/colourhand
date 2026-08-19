@@ -80,6 +80,7 @@ a {
 
   --space-xlg: 60px;
   --space-lg: 30px;
+  --space-xlmd: 24px;
   --space-xmd: 20px;
   --space-mdd: 16px;
   --space-md: 12px;
@@ -448,4 +449,44 @@ body {
 .panel-swatches,
 .panel-generate {
   opacity: 0;
+}
+
+/* 
+# ============================================================
+# Background Dots
+# ============================================================
+*/
+.bg-dots-base,
+.bg-dots-spotlight {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(
+    var(--dot-ink, --clr-white-100) 1.4px,
+    transparent 1.6px
+  );
+  background-size: var(--space-xlmd) var(--space-xlmd);
+}
+
+.bg-dots-base {
+  opacity: 0.14;
+}
+
+.bg-dots-spotlight {
+  opacity: 1;
+  transition: opacity 0.35s ease;
+  -webkit-mask-image: radial-gradient(
+    circle 170px at var(--mx, 50%) var(--my, 50%),
+    black,
+    transparent 70%
+  );
+  mask-image: radial-gradient(
+    circle 170px at var(--mx, 50%) var(--my, 50%),
+    black,
+    transparent 70%
+  );
+}
+
+.bg-wrapper.is-hovering .bg-dots-spotlight {
+  opacity: 0.9;
 }

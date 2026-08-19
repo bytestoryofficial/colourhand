@@ -1,7 +1,7 @@
 import { animate } from 'motion';
 import handImageUrl from '../assets/hand.png';
 
-import randomHex, { formatColorCodes } from '../helpers/color';
+import randomHex, { formatColorCodes, getContrastInk } from '../helpers/color';
 import type { Timout } from '../helpers/types';
 
 const handElement = document.querySelector<HTMLDivElement>('.hand-img');
@@ -26,9 +26,14 @@ const applyGeneratedColor = (
   codesElement: HTMLElement,
 ): void => {
   const newColor: string = randomHex();
-  document.documentElement.style.setProperty('--clr-mask', newColor);
+
   hexValueElement.textContent = newColor;
   codesElement.innerHTML = formatColorCodes(newColor);
+  document.documentElement.style.setProperty('--clr-mask', newColor);
+  document.documentElement.style.setProperty(
+    '--dot-ink',
+    getContrastInk(newColor),
+  );
 };
 
 /**
@@ -44,6 +49,10 @@ const applyInitColor = (
 
   hexValueElement.textContent = initialColor.toUpperCase();
   codesElement.innerHTML = formatColorCodes(initialColor);
+  document.documentElement.style.setProperty(
+    '--dot-ink',
+    getContrastInk(initialColor),
+  );
 };
 
 /**

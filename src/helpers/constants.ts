@@ -16,3 +16,5 @@ export const GENERATE_BTN_SELECTOR = '#generate-btn';
 export const HEX_SELECTOR = '#hex-value';
 export const COPY_BTN_SELECTOR = '#copy-btn';
 export const CODES_SELECTOR = '#color-codes';
+export const DOTS_SELECTOR = '.bg-dots-base';
+export const DOTS_SPORTLIGHT_SELECTOR = '.bg-dots-spotlight';

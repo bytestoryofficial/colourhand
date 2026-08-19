@@ -1,7 +1,10 @@
 import '@fontsource-variable/fraunces/full-italic.css';
 import '@fontsource/fira-sans';
 
-import { animateParallaxHand } from './components/effects';
+import {
+  animateDotsMousemove,
+  animateParallaxHand,
+} from './components/effects';
 import animatePreloaderText, {
   animateCountPercentUp,
   animateIntroPage,
@@ -104,6 +107,7 @@ const init = async () => {
   }
 
   animateParallaxHand();
+  animateDotsMousemove();
 
   return Promise.resolve();
 };
