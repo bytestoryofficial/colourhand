@@ -6,16 +6,17 @@ import animatePreloaderText, {
   animateIntroPage,
 } from './components/intro';
 import './components/dom';
+import {
+  applyGeneratedColor,
+  applyInitColor,
+  copyToClipboard,
+  decodedImage,
+} from './components/dom';
 
 import * as SELECTORS from './helpers/constants';
 import type { HTMLElementNull } from './helpers/types';
 
 import './style.css';
-import {
-  applyGeneratedColor,
-  applyInitColor,
-  decodedImage,
-} from './components/dom';
 
 const init = async () => {
   // ------------- HTML SELECTORS FOR WORK -------------
@@ -28,12 +29,25 @@ const init = async () => {
   const codesElement = document.querySelector<HTMLElement>(
     SELECTORS.CODES_SELECTOR,
   );
+  const copyButton = document.querySelector<HTMLButtonElement>(
+    SELECTORS.COPY_BTN_SELECTOR,
+  );
 
+  /* Apply start color for HEX and background */
   if (hexSelector && codesElement) applyInitColor(hexSelector, codesElement);
 
+  /* Generate colors onClick */
   if (generateBtnSelector && hexSelector && codesElement) {
     generateBtnSelector.addEventListener('click', () => {
       applyGeneratedColor(hexSelector, codesElement);
+    });
+  }
+
+  /* Copy btn onClick */
+  if (copyButton && hexSelector) {
+    copyButton.addEventListener('click', () => {
+      const hex = hexSelector.textContent;
+      void copyToClipboard(hex, copyButton);
     });
   }
 

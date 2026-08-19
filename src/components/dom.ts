@@ -1,6 +1,8 @@
+import { animate } from 'motion';
 import handImageUrl from '../assets/hand.png';
 
 import randomHex, { formatColorCodes } from '../helpers/color';
+import type { Timout } from '../helpers/types';
 
 const handElement = document.querySelector<HTMLDivElement>('.hand-img');
 const handImage = document.querySelector<HTMLImageElement>('#hero-hand-image');
@@ -44,4 +46,53 @@ const applyInitColor = (
   codesElement.innerHTML = formatColorCodes(initialColor);
 };
 
-export { applyGeneratedColor, applyInitColor, decodedImage };
+/**
+ * @Function:
+ * Create animation for copied! state
+ */
+const animateCopied = (buttonElement: HTMLButtonElement): void => {
+  const checkIcon = buttonElement.querySelector<HTMLElement>(
+    '[data-icon="check"]',
+  );
+
+  let resetTimeout: Timout | undefined;
+
+  buttonElement.classList.add('is-copied');
+
+  if (checkIcon)
+    animate(
+      checkIcon,
+      { scale: [0.4, 1.15, 1] },
+      { type: 'spring', stiffness: 500, damping: 15 },
+    ).finished;
+
+  clearTimeout(resetTimeout);
+  resetTimeout = setTimeout(() => {
+    buttonElement.classList.remove('is-copied');
+  }, 1600);
+};
+
+/**
+ * @Function:
+ * Copy HEX color to the clipboard with onClick method
+ * Checking for NotAllowedError (allowed only for HTTPS and localhost)
+ */
+const copyToClipboard = async (
+  text: string,
+  buttonElement: HTMLButtonElement,
+): Promise<void> => {
+  try {
+    await navigator.clipboard.writeText(text);
+    animateCopied(buttonElement);
+  } catch (error: unknown) {
+    console.log('Error with copyToClipboard: ', error);
+  }
+};
+
+export {
+  animateCopied,
+  applyGeneratedColor,
+  applyInitColor,
+  copyToClipboard,
+  decodedImage,
+};

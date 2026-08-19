@@ -50,11 +50,20 @@
                  <div class="panel-hex-row">
                     <div class="panel-hex ink" id="hex-value">#0F1412</div>
 
-                    <button class="panel-copy" id="copy-btn" type="button" aria-label="Скопировать HEX">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" stroke-width="2">
-                            <rect x="9" y="9" width="13" height="13" rx="2"/>
-                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
-                        </svg>
+                    <!-- Copy Button -->
+                    <button class="panel-copy" id="copy-btn" type="button">
+                        <span class="copy-btn__icon" data-icon="copy" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" stroke-width="2">
+                                <rect x="9" y="9" width="13" height="13" rx="2"/>
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                            </svg>
+                        </span>
+
+                        <span class="copy-btn__icon" data-icon="check" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true" stroke-width="2">
+                                <path d="M20 6 9 17l-5-5" />
+                            </svg>
+                        </span>
                     </button>
                 </div>
 
@@ -65,6 +74,7 @@
         
                 <!-- <div class="panel-swatches" id="swatches"></div> -->
 
+          
                 <button class="panel-generate" id="generate-btn" type="button">
                     Generate
                 </button>
