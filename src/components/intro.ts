@@ -102,9 +102,9 @@ const animateIntroPage = async (
 
   // phase 2
   const PHASE_2_DURATION = 0.75;
-  const NAV_DELAY_INTO_PHASE_2 = 0.5;
-  const HAND_DELAY_INTO_PHASE_2 = 0.85;
-  const PANEL_DELAY_INTO_PHASE_2 = 0.95;
+  const NAV_DELAY_INTO_PHASE_2 = 1.15;
+  const HAND_DELAY_INTO_PHASE_2 = 1.25;
+  const PANEL_DELAY_INTO_PHASE_2 = 1.35;
 
   const scaleLine = animate(
     backgroundWrapperElement,
@@ -157,8 +157,8 @@ const animateIntroPage = async (
   await Promise.all([
     fadePreloader,
     scaleLine,
-    revealNavigation,
     revealHand,
+    revealNavigation,
     panelFadeOut,
   ]);
   preloaderElement.remove();
