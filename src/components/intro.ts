@@ -102,9 +102,9 @@ const animateIntroPage = async (
 
   // phase 2
   const PHASE_2_DURATION = 0.75;
-  const NAV_DELAY_INTO_PHASE_2 = 1.15;
-  const HAND_DELAY_INTO_PHASE_2 = 1.25;
-  const PANEL_DELAY_INTO_PHASE_2 = 1.35;
+  const NAV_DELAY_INTO_PHASE_2 = 0.85;
+  const HAND_DELAY_INTO_PHASE_2 = 0.9;
+  const PANEL_DELAY_INTO_PHASE_2 = 0.95;
 
   const scaleLine = animate(
     backgroundWrapperElement,
@@ -117,7 +117,7 @@ const animateIntroPage = async (
     [navLeftElement, navRightElement],
     { y: [-16, 0], opacity: [0, 1] },
     {
-      duration: 0.75,
+      duration: 0.8,
       delay: stagger(0.08, { startDelay: NAV_DELAY_INTO_PHASE_2 }),
       ease: [0.25, 1, 0.36, 1],
     },
@@ -128,7 +128,7 @@ const animateIntroPage = async (
     handElement,
     { opacity: [0, 1], x: [-60, 0] },
     {
-      duration: 0.8,
+      duration: 0.85,
       delay: HAND_DELAY_INTO_PHASE_2,
       ease: [0.22, 1, 0.36, 1],
     },
@@ -148,7 +148,7 @@ const animateIntroPage = async (
     panelRows,
     { y: [16, 0], opacity: [0, 1] },
     {
-      duration: 0.5,
+      duration: 0.9,
       delay: stagger(0.08, { startDelay: PANEL_DELAY_INTO_PHASE_2 }),
       ease: [0.22, 1, 0.36, 1],
     },
