@@ -186,6 +186,7 @@ body {
   position: absolute;
   left: 0px;
   top: 50%;
+  z-index: 20;
   width: min(78vw, 900px);
   transform: translateY(-50%);
 }
@@ -297,8 +298,8 @@ body {
   bottom: 0;
   margin: auto 0;
   height: fit-content;
-  z-index: unset;
   display: flex;
+  z-index: unset;
   flex-direction: column;
   align-items: flex-end;
   gap: var(--space-xmd);
@@ -459,10 +460,11 @@ body {
 .bg-dots-base,
 .bg-dots-spotlight {
   position: absolute;
+  z-index: 1;
   inset: 0;
   pointer-events: none;
   background-image: radial-gradient(
-    var(--dot-ink, --clr-white-100) 1.4px,
+    var(--dot-ink, var(--clr-white-100)) 1.4px,
     transparent 1.6px
   );
   background-size: var(--space-xlmd) var(--space-xlmd);

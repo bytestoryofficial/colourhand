@@ -27,8 +27,8 @@ const applyGeneratedColor = (
 ): void => {
   const newColor: string = randomHex();
 
-  hexValueElement.textContent = newColor;
   codesElement.innerHTML = formatColorCodes(newColor);
+  hexValueElement.textContent = newColor;
   document.documentElement.style.setProperty('--clr-mask', newColor);
   document.documentElement.style.setProperty(
     '--dot-ink',
