@@ -1,3 +1,5 @@
+import type { RGB } from './types';
+
 /**
  * @Function for parse HEX Channel
  */
@@ -91,7 +93,26 @@ const randomHex = (): string => {
 export const formatColorCodes = (hex: string): string => {
   const [r, g, b] = hexToRgb(hex);
   const [h, s, l] = rgbToHsl(r, g, b);
-  return `RGB ${r}, ${g}, ${b}   HSL ${h}, ${s}%, ${l}%`;
+  return `<span>RGB ${r}, ${g}, ${b}</span>/<span>HSL ${h}, ${s}%, ${l}%</span>`;
+};
+
+/**
+ * Functionі
+ * Set RGB color for HTML dots
+ */
+export const getLuminance = (hex: string): number => {
+  const [r, g, b] = hexToRgb(hex).map((channel) => {
+    const normalized: number = channel / 255;
+    return normalized <= 0.03928
+      ? normalized / 12.92
+      : ((normalized + 0.055) / 1.055) ** 2.4;
+  }) as RGB;
+
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+};
+
+export const getContrastInk = (hex: string): string => {
+  return getLuminance(hex) > 0.45 ? '#000000' : '#ffffff';
 };
 
 export default randomHex;
