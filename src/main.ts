@@ -39,6 +39,12 @@ const init = async () => {
   const eyebrowElement = document.querySelector<HTMLElement>(
     SELECTORS.EYEBROW_SELECTOR,
   );
+  const navLogoElement = document.querySelector<HTMLElement>(
+    SELECTORS.LOGO_SELECTOR,
+  );
+  const navIconElement = document.querySelector<HTMLElement>(
+    SELECTORS.NAV_GITHUB_SELECTOR,
+  );
 
   /* Apply start color for HEX and background */
   if (
@@ -46,7 +52,9 @@ const init = async () => {
     codesElement &&
     eyebrowElement &&
     generateBtnSelector &&
-    copyButton
+    copyButton &&
+    navLogoElement &&
+    navIconElement
   )
     applyInitColor(
       hexSelector,
@@ -54,6 +62,8 @@ const init = async () => {
       eyebrowElement,
       generateBtnSelector,
       copyButton,
+      navLogoElement,
+      navIconElement,
     );
 
   /* Generate colors onClick */
@@ -63,7 +73,9 @@ const init = async () => {
     codesElement &&
     eyebrowElement &&
     eyebrowElement &&
-    copyButton
+    copyButton &&
+    navLogoElement &&
+    navIconElement
   ) {
     generateBtnSelector.addEventListener('click', () => {
       applyGeneratedColor(
@@ -72,6 +84,8 @@ const init = async () => {
         eyebrowElement,
         generateBtnSelector,
         copyButton,
+        navLogoElement,
+        navIconElement,
       );
     });
   }

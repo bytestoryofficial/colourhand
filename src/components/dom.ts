@@ -27,6 +27,8 @@ const applyGeneratedColor = (
   eyebrowElement: HTMLElement,
   generateButton: HTMLElement,
   copyButton: HTMLElement,
+  logo: HTMLElement,
+  navIcon: HTMLElement,
 ): void => {
   const newColor: string = randomHex();
   const inkColor: string = getContrastInk(newColor);
@@ -41,6 +43,8 @@ const applyGeneratedColor = (
   generateButton.style.borderColor = inkColor;
   copyButton.style.color = inkColor;
   copyButton.style.borderColor = inkColor;
+  logo.style.color = inkColor;
+  navIcon.style.color = inkColor;
 
   document.documentElement.style.setProperty('--clr-mask', newColor);
   document.documentElement.style.setProperty('--dot-ink', inkColor);
@@ -55,6 +59,8 @@ const applyInitColor = (
   eyebrowElement: HTMLElement,
   generateButton: HTMLElement,
   copyButton: HTMLElement,
+  logo: HTMLElement,
+  navIcon: HTMLElement,
 ): void => {
   const initialColor: string = getComputedStyle(document.documentElement)
     .getPropertyValue('--clr-mask')
@@ -71,6 +77,8 @@ const applyInitColor = (
   generateButton.style.borderColor = inkColor;
   copyButton.style.color = inkColor;
   copyButton.style.borderColor = inkColor;
+  logo.style.color = inkColor;
+  navIcon.style.color = inkColor;
 
   document.documentElement.style.setProperty('--dot-ink', inkColor);
 };

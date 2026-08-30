@@ -19,3 +19,5 @@ export const COPY_BTN_SELECTOR = '#copy-btn';
 export const CODES_SELECTOR = '#color-codes';
 export const DOTS_SELECTOR = '.bg-dots-base';
 export const DOTS_SPORTLIGHT_SELECTOR = '.bg-dots-spotlight';
+export const LOGO_SELECTOR = '#logo';
+export const NAV_GITHUB_SELECTOR = '#nav-github';
