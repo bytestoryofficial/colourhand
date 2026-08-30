@@ -14,8 +14,9 @@
   "devDependencies": {
     "@biomejs/biome": "^2",
     "@types/bun": "latest",
+    "happy-dom": "^20.11.6",
     "vite": "^8",
-    "vitest": "^4.1.10"
+    "vitest": "^4.1.11"
   },
   "peerDependencies": {
     "typescript": "^7.0.2"

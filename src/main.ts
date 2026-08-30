@@ -36,14 +36,57 @@ const init = async () => {
   const copyButton = document.querySelector<HTMLButtonElement>(
     SELECTORS.COPY_BTN_SELECTOR,
   );
+  const eyebrowElement = document.querySelector<HTMLElement>(
+    SELECTORS.EYEBROW_SELECTOR,
+  );
+  const navLogoElement = document.querySelector<HTMLElement>(
+    SELECTORS.LOGO_SELECTOR,
+  );
+  const navIconElement = document.querySelector<HTMLElement>(
+    SELECTORS.NAV_GITHUB_SELECTOR,
+  );
 
   /* Apply start color for HEX and background */
-  if (hexSelector && codesElement) applyInitColor(hexSelector, codesElement);
+  if (
+    hexSelector &&
+    codesElement &&
+    eyebrowElement &&
+    generateBtnSelector &&
+    copyButton &&
+    navLogoElement &&
+    navIconElement
+  )
+    applyInitColor(
+      hexSelector,
+      codesElement,
+      eyebrowElement,
+      generateBtnSelector,
+      copyButton,
+      navLogoElement,
+      navIconElement,
+    );
 
   /* Generate colors onClick */
-  if (generateBtnSelector && hexSelector && codesElement) {
+  if (
+    generateBtnSelector &&
+    hexSelector &&
+    codesElement &&
+    eyebrowElement &&
+    eyebrowElement &&
+    copyButton &&
+    navLogoElement &&
+    navIconElement
+  ) {
     generateBtnSelector.addEventListener('click', () => {
-      applyGeneratedColor(hexSelector, codesElement);
+      applyGeneratedColor(
+        hexSelector,
+        codesElement,
+        eyebrowElement,
+        generateBtnSelector,
+        copyButton,
+        navLogoElement,
+        navIconElement,
+      );
     });
   }
 

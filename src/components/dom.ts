@@ -24,16 +24,30 @@ if (handImage && handElement) {
 const applyGeneratedColor = (
   hexValueElement: HTMLElement,
   codesElement: HTMLElement,
+  eyebrowElement: HTMLElement,
+  generateButton: HTMLElement,
+  copyButton: HTMLElement,
+  logo: HTMLElement,
+  navIcon: HTMLElement,
 ): void => {
   const newColor: string = randomHex();
+  const inkColor: string = getContrastInk(newColor);
 
   codesElement.innerHTML = formatColorCodes(newColor);
   hexValueElement.textContent = newColor;
+
+  hexValueElement.style.color = inkColor;
+  codesElement.style.color = inkColor;
+  eyebrowElement.style.color = inkColor;
+  generateButton.style.color = inkColor;
+  generateButton.style.borderColor = inkColor;
+  copyButton.style.color = inkColor;
+  copyButton.style.borderColor = inkColor;
+  logo.style.color = inkColor;
+  navIcon.style.color = inkColor;
+
   document.documentElement.style.setProperty('--clr-mask', newColor);
-  document.documentElement.style.setProperty(
-    '--dot-ink',
-    getContrastInk(newColor),
-  );
+  document.documentElement.style.setProperty('--dot-ink', inkColor);
 };
 
 /**
@@ -42,17 +56,31 @@ const applyGeneratedColor = (
 const applyInitColor = (
   hexValueElement: HTMLElement,
   codesElement: HTMLElement,
+  eyebrowElement: HTMLElement,
+  generateButton: HTMLElement,
+  copyButton: HTMLElement,
+  logo: HTMLElement,
+  navIcon: HTMLElement,
 ): void => {
   const initialColor: string = getComputedStyle(document.documentElement)
     .getPropertyValue('--clr-mask')
     .trim();
+  const inkColor: string = getContrastInk(initialColor);
 
   hexValueElement.textContent = initialColor.toUpperCase();
   codesElement.innerHTML = formatColorCodes(initialColor);
-  document.documentElement.style.setProperty(
-    '--dot-ink',
-    getContrastInk(initialColor),
-  );
+
+  hexValueElement.style.color = inkColor;
+  codesElement.style.color = inkColor;
+  eyebrowElement.style.color = inkColor;
+  generateButton.style.color = inkColor;
+  generateButton.style.borderColor = inkColor;
+  copyButton.style.color = inkColor;
+  copyButton.style.borderColor = inkColor;
+  logo.style.color = inkColor;
+  navIcon.style.color = inkColor;
+
+  document.documentElement.style.setProperty('--dot-ink', inkColor);
 };
 
 /**
