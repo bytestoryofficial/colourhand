@@ -36,14 +36,43 @@ const init = async () => {
   const copyButton = document.querySelector<HTMLButtonElement>(
     SELECTORS.COPY_BTN_SELECTOR,
   );
+  const eyebrowElement = document.querySelector<HTMLElement>(
+    SELECTORS.EYEBROW_SELECTOR,
+  );
 
   /* Apply start color for HEX and background */
-  if (hexSelector && codesElement) applyInitColor(hexSelector, codesElement);
+  if (
+    hexSelector &&
+    codesElement &&
+    eyebrowElement &&
+    generateBtnSelector &&
+    copyButton
+  )
+    applyInitColor(
+      hexSelector,
+      codesElement,
+      eyebrowElement,
+      generateBtnSelector,
+      copyButton,
+    );
 
   /* Generate colors onClick */
-  if (generateBtnSelector && hexSelector && codesElement) {
+  if (
+    generateBtnSelector &&
+    hexSelector &&
+    codesElement &&
+    eyebrowElement &&
+    eyebrowElement &&
+    copyButton
+  ) {
     generateBtnSelector.addEventListener('click', () => {
-      applyGeneratedColor(hexSelector, codesElement);
+      applyGeneratedColor(
+        hexSelector,
+        codesElement,
+        eyebrowElement,
+        generateBtnSelector,
+        copyButton,
+      );
     });
   }
 
