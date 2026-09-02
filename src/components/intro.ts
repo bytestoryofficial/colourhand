@@ -39,7 +39,7 @@ const animateCountPercentUp = (percentElement: HTMLElement): Promise<void> => {
       return;
     }
 
-    const duration: number = 1600;
+    const duration: number = 1000;
     const start: number = performance.now();
 
     const percentTick = (now: number) => {

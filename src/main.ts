@@ -110,6 +110,8 @@ const init = async () => {
     );
   }
 
+  await new Promise((resolve) => requestAnimationFrame(resolve));
+
   animateParallaxHand();
   animateDotsMousemove();
   spacebarGenerateColor();

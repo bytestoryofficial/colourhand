@@ -265,6 +265,7 @@ body {
   font-weight: 400;
   line-height: var(--font-lh-text);
   transition: color 0.5s ease;
+  user-select: none;
 }
 
 .nav-right {
