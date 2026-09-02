@@ -22,8 +22,6 @@ import {
 import * as SELECTORS from './helpers/constants';
 import type { HTMLElementNull } from './helpers/types';
 
-import './style.css';
-
 const init = async () => {
   // ------------- HTML SELECTORS FOR WORK -------------
   const generateBtnSelector = document.querySelector<HTMLButtonElement>(
