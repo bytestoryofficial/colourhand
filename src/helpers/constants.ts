@@ -22,3 +22,4 @@ export const LOGO_SELECTOR = '#logo';
 export const NAV_GITHUB_SELECTOR = '#nav-github';
 export const HINT_SELECTOR = '#panel-hint';
 export const GITHUB_LINK_SELECTOR = '#github-link';
+export const SWATCHES_SELECTOR = '#swatches';
