@@ -19,6 +19,9 @@ if (handImage && handElement) {
   });
 }
 
+const MAX_HISTORY = 5;
+let colorHistory: string[] = [];
+
 /**
  * @Enum Function
  * Get all selectors for generating color and return them all
@@ -49,6 +52,10 @@ const useGenerateSelectors = () => {
     SELECTORS.HINT_SELECTOR,
   );
 
+  const swatchesElement = document.querySelector<HTMLElement>(
+    SELECTORS.SWATCHES_SELECTOR,
+  );
+
   return {
     hexValueElement: hexSelector,
     codesElement,
@@ -58,15 +65,16 @@ const useGenerateSelectors = () => {
     logo: navLogoElement,
     navIcon: navIconElement,
     hintElement,
+    swatchesElement,
   };
 };
 
 /**
- * @Function for generate random color
+ * @Function
+ * Apply a given hex color to every UI element that needs contrast-aware ink
  */
-const applyGeneratedColor = (): void => {
-  const newColor: string = randomHex();
-  const inkColor: string = getContrastInk(newColor);
+const paintColor = (hex: string): void => {
+  const inkColor: string = getContrastInk(hex);
 
   const {
     codesElement,
@@ -89,8 +97,8 @@ const applyGeneratedColor = (): void => {
     navIcon &&
     hintElement
   ) {
-    codesElement.innerHTML = formatColorCodes(newColor);
-    hexValueElement.textContent = newColor;
+    hexValueElement.textContent = hex.toUpperCase();
+    codesElement.innerHTML = formatColorCodes(hex);
 
     hexValueElement.style.color = inkColor;
     codesElement.style.color = inkColor;
@@ -103,9 +111,60 @@ const applyGeneratedColor = (): void => {
     navIcon.style.color = inkColor;
     hintElement.style.color = inkColor;
 
-    document.documentElement.style.setProperty('--clr-mask', newColor);
+    document.documentElement.style.setProperty('--clr-mask', hex);
     document.documentElement.style.setProperty('--dot-ink', inkColor);
   }
+};
+
+/**
+ * @Function
+ * Add a hex to the front of history (deduplicated, capped), then re-render swatches
+ */
+const addColorToHistory = (hex: string): void => {
+  const filteredHistory: string[] = [
+    ...colorHistory.filter((item) => item !== hex),
+  ];
+  const filteredHistoryWithHex: string[] = [hex, ...filteredHistory];
+  colorHistory = [...filteredHistoryWithHex].slice(0, MAX_HISTORY);
+
+  renderSwatches();
+};
+
+/**
+ * @Function
+ * Render the swatch buttons from current history state
+ */
+const renderSwatches = (): void => {
+  const { swatchesElement } = useGenerateSelectors();
+  if (!swatchesElement) return;
+
+  swatchesElement.innerHTML = '';
+
+  colorHistory.forEach((hex: string, index: number) => {
+    const swatchButton: HTMLButtonElement = document.createElement('button');
+    swatchButton.className = 'swatch';
+    swatchButton.style.backgroundColor = hex;
+    swatchButton.type = 'button';
+    swatchButton.setAttribute('aria-label', `Use color ${hex}`);
+
+    if (index === 0) swatchButton.classList.add('is-active');
+
+    swatchButton.addEventListener('click', () => {
+      paintColor(hex);
+      addColorToHistory(hex);
+    });
+
+    swatchesElement.appendChild(swatchButton);
+  });
+};
+
+/**
+ * @Function for generate random color
+ */
+const applyGeneratedColor = (): void => {
+  const newColor: string = randomHex();
+  paintColor(newColor);
+  addColorToHistory(newColor);
 };
 
 /**
@@ -115,45 +174,9 @@ const applyInitColor = (): void => {
   const initialColor: string = getComputedStyle(document.documentElement)
     .getPropertyValue('--clr-mask')
     .trim();
-  const inkColor: string = getContrastInk(initialColor);
 
-  const {
-    codesElement,
-    hexValueElement,
-    eyebrowElement,
-    generateButton,
-    copyButton,
-    logo,
-    navIcon,
-    hintElement,
-  } = useGenerateSelectors();
-
-  if (
-    codesElement &&
-    hexValueElement &&
-    eyebrowElement &&
-    generateButton &&
-    copyButton &&
-    logo &&
-    navIcon &&
-    hintElement
-  ) {
-    hexValueElement.textContent = initialColor.toUpperCase();
-    codesElement.innerHTML = formatColorCodes(initialColor);
-
-    hexValueElement.style.color = inkColor;
-    codesElement.style.color = inkColor;
-    eyebrowElement.style.color = inkColor;
-    generateButton.style.color = inkColor;
-    generateButton.style.borderColor = inkColor;
-    copyButton.style.color = inkColor;
-    copyButton.style.borderColor = inkColor;
-    logo.style.color = inkColor;
-    navIcon.style.color = inkColor;
-    hintElement.style.color = inkColor;
-
-    document.documentElement.style.setProperty('--dot-ink', inkColor);
-  }
+  paintColor(initialColor);
+  addColorToHistory(initialColor);
 };
 
 /**

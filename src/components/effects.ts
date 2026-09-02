@@ -103,7 +103,18 @@ const animateDotsMousemove = (): void => {
       bgWrapperElement.style.setProperty('--my', `${latest}%`);
     });
 
-    bgWrapperElement.addEventListener('mouseenter', () => {
+    if (bgWrapperElement.matches(':hover')) {
+      bgWrapperElement.classList.add('is-hovering');
+    }
+
+    bgWrapperElement.addEventListener('mouseenter', (event: MouseEvent) => {
+      const rect: DOMRect = bgWrapperElement.getBoundingClientRect();
+      const initialX: number = ((event.clientX - rect.left) / rect.width) * 100;
+      const initialY: number = ((event.clientY - rect.top) / rect.height) * 100;
+
+      mx.jump(initialX);
+      my.jump(initialY);
+
       bgWrapperElement.classList.add('is-hovering');
     });
 
