@@ -44,6 +44,46 @@ const animateParallaxHand = (): void => {
 
 /**
  * @Animation
+ * Create hover animation for github link
+ */
+const animateGithubHover = (): void => {
+  const githubLinkElement = document.querySelector<HTMLElement>(
+    SELECTORS.GITHUB_LINK_SELECTOR,
+  );
+  const githubSpanElement = document.querySelector<HTMLElement>(
+    SELECTORS.NAV_GITHUB_SELECTOR,
+  );
+
+  if (!githubLinkElement || !githubSpanElement) return;
+
+  const MAGNETIC_STRENGTH: number = 0.35;
+
+  githubLinkElement.addEventListener('mouseenter', (event: MouseEvent) => {
+    const rect: DOMRect = githubLinkElement.getBoundingClientRect();
+    const centerX: number = rect.left + rect.width / 2;
+    const centerY: number = rect.top + rect.height / 2;
+
+    const offsetX: number = (event.clientX - centerX) * MAGNETIC_STRENGTH;
+    const offsetY: number = (event.clientY - centerY) * MAGNETIC_STRENGTH;
+
+    animate(
+      githubSpanElement,
+      { x: offsetX, y: offsetY, scale: 1.02 },
+      { type: 'spring', stiffness: 200, damping: 15 },
+    );
+  });
+
+  githubLinkElement.addEventListener('mouseleave', () => {
+    animate(
+      githubSpanElement,
+      { x: 0, y: 0, scale: 1 },
+      { type: 'spring', stiffness: 200, damping: 14 },
+    );
+  });
+};
+
+/**
+ * @Animation
  * Create mousemove blick dots animation
  */
 const animateDotsMousemove = (): void => {
@@ -82,4 +122,4 @@ const animateDotsMousemove = (): void => {
   }
 };
 
-export { animateDotsMousemove, animateParallaxHand };
+export { animateDotsMousemove, animateGithubHover, animateParallaxHand };

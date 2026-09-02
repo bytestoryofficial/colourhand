@@ -3,6 +3,7 @@ import '@fontsource/fira-sans';
 
 import {
   animateDotsMousemove,
+  animateGithubHover,
   animateParallaxHand,
 } from './components/effects';
 import animatePreloaderText, {
@@ -112,6 +113,7 @@ const init = async () => {
   animateParallaxHand();
   animateDotsMousemove();
   spacebarGenerateColor();
+  animateGithubHover();
 
   return Promise.resolve();
 };
