@@ -2,6 +2,7 @@ import { animate } from 'motion';
 import handImageUrl from '../assets/hand.png';
 
 import randomHex, { formatColorCodes, getContrastInk } from '../helpers/color';
+import * as SELECTORS from '../helpers/constants';
 import type { Timout } from '../helpers/types';
 
 const handElement = document.querySelector<HTMLDivElement>('.hand-img');
@@ -19,68 +20,140 @@ if (handImage && handElement) {
 }
 
 /**
+ * @Enum Function
+ * Get all selectors for generating color and return them all
+ */
+const useGenerateSelectors = () => {
+  const hexSelector = document.querySelector<HTMLElement>(
+    SELECTORS.HEX_SELECTOR,
+  );
+  const codesElement = document.querySelector<HTMLElement>(
+    SELECTORS.CODES_SELECTOR,
+  );
+  const eyebrowElement = document.querySelector<HTMLElement>(
+    SELECTORS.EYEBROW_SELECTOR,
+  );
+  const generateBtnSelector = document.querySelector<HTMLButtonElement>(
+    SELECTORS.GENERATE_BTN_SELECTOR,
+  );
+  const copyButton = document.querySelector<HTMLButtonElement>(
+    SELECTORS.COPY_BTN_SELECTOR,
+  );
+  const navLogoElement = document.querySelector<HTMLElement>(
+    SELECTORS.LOGO_SELECTOR,
+  );
+  const navIconElement = document.querySelector<HTMLElement>(
+    SELECTORS.NAV_GITHUB_SELECTOR,
+  );
+  const hintElement = document.querySelector<HTMLElement>(
+    SELECTORS.HINT_SELECTOR,
+  );
+
+  return {
+    hexValueElement: hexSelector,
+    codesElement,
+    eyebrowElement,
+    generateButton: generateBtnSelector,
+    copyButton,
+    logo: navLogoElement,
+    navIcon: navIconElement,
+    hintElement,
+  };
+};
+
+/**
  * @Function for generate random color
  */
-const applyGeneratedColor = (
-  hexValueElement: HTMLElement,
-  codesElement: HTMLElement,
-  eyebrowElement: HTMLElement,
-  generateButton: HTMLElement,
-  copyButton: HTMLElement,
-  logo: HTMLElement,
-  navIcon: HTMLElement,
-): void => {
+const applyGeneratedColor = (): void => {
   const newColor: string = randomHex();
   const inkColor: string = getContrastInk(newColor);
 
-  codesElement.innerHTML = formatColorCodes(newColor);
-  hexValueElement.textContent = newColor;
+  const {
+    codesElement,
+    hexValueElement,
+    eyebrowElement,
+    generateButton,
+    copyButton,
+    logo,
+    navIcon,
+    hintElement,
+  } = useGenerateSelectors();
 
-  hexValueElement.style.color = inkColor;
-  codesElement.style.color = inkColor;
-  eyebrowElement.style.color = inkColor;
-  generateButton.style.color = inkColor;
-  generateButton.style.borderColor = inkColor;
-  copyButton.style.color = inkColor;
-  copyButton.style.borderColor = inkColor;
-  logo.style.color = inkColor;
-  navIcon.style.color = inkColor;
+  if (
+    codesElement &&
+    hexValueElement &&
+    eyebrowElement &&
+    generateButton &&
+    copyButton &&
+    logo &&
+    navIcon &&
+    hintElement
+  ) {
+    codesElement.innerHTML = formatColorCodes(newColor);
+    hexValueElement.textContent = newColor;
 
-  document.documentElement.style.setProperty('--clr-mask', newColor);
-  document.documentElement.style.setProperty('--dot-ink', inkColor);
+    hexValueElement.style.color = inkColor;
+    codesElement.style.color = inkColor;
+    eyebrowElement.style.color = inkColor;
+    generateButton.style.color = inkColor;
+    generateButton.style.borderColor = inkColor;
+    copyButton.style.color = inkColor;
+    copyButton.style.borderColor = inkColor;
+    logo.style.color = inkColor;
+    navIcon.style.color = inkColor;
+    hintElement.style.color = inkColor;
+
+    document.documentElement.style.setProperty('--clr-mask', newColor);
+    document.documentElement.style.setProperty('--dot-ink', inkColor);
+  }
 };
 
 /**
  * @Function for init color
  */
-const applyInitColor = (
-  hexValueElement: HTMLElement,
-  codesElement: HTMLElement,
-  eyebrowElement: HTMLElement,
-  generateButton: HTMLElement,
-  copyButton: HTMLElement,
-  logo: HTMLElement,
-  navIcon: HTMLElement,
-): void => {
+const applyInitColor = (): void => {
   const initialColor: string = getComputedStyle(document.documentElement)
     .getPropertyValue('--clr-mask')
     .trim();
   const inkColor: string = getContrastInk(initialColor);
 
-  hexValueElement.textContent = initialColor.toUpperCase();
-  codesElement.innerHTML = formatColorCodes(initialColor);
+  const {
+    codesElement,
+    hexValueElement,
+    eyebrowElement,
+    generateButton,
+    copyButton,
+    logo,
+    navIcon,
+    hintElement,
+  } = useGenerateSelectors();
 
-  hexValueElement.style.color = inkColor;
-  codesElement.style.color = inkColor;
-  eyebrowElement.style.color = inkColor;
-  generateButton.style.color = inkColor;
-  generateButton.style.borderColor = inkColor;
-  copyButton.style.color = inkColor;
-  copyButton.style.borderColor = inkColor;
-  logo.style.color = inkColor;
-  navIcon.style.color = inkColor;
+  if (
+    codesElement &&
+    hexValueElement &&
+    eyebrowElement &&
+    generateButton &&
+    copyButton &&
+    logo &&
+    navIcon &&
+    hintElement
+  ) {
+    hexValueElement.textContent = initialColor.toUpperCase();
+    codesElement.innerHTML = formatColorCodes(initialColor);
 
-  document.documentElement.style.setProperty('--dot-ink', inkColor);
+    hexValueElement.style.color = inkColor;
+    codesElement.style.color = inkColor;
+    eyebrowElement.style.color = inkColor;
+    generateButton.style.color = inkColor;
+    generateButton.style.borderColor = inkColor;
+    copyButton.style.color = inkColor;
+    copyButton.style.borderColor = inkColor;
+    logo.style.color = inkColor;
+    navIcon.style.color = inkColor;
+    hintElement.style.color = inkColor;
+
+    document.documentElement.style.setProperty('--dot-ink', inkColor);
+  }
 };
 
 /**

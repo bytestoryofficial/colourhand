@@ -515,3 +515,34 @@ body {
 .bg-wrapper.is-hovering .bg-dots-spotlight {
   opacity: 0.9;
 }
+
+.panel-hint {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: var(--ltr-spacing-md);
+  line-height: var(--font-lh-links);
+  opacity: 0.5;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.5s ease;
+}
+
+.panel-hint kbd {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 600;
+  padding: 0.5px 6px 1px 6px;
+  border: 1px solid currentColor;
+  text-transform: uppercase;
+  border-radius: 5px;
+  line-height: 1.4;
+  opacity: 0.9;
+}
+
+.panel-hint,
+.panel-swatches,
+.panel-generate {
+  opacity: 0;
+}

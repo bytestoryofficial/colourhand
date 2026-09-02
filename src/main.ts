@@ -9,6 +9,7 @@ import animatePreloaderText, {
   animateCountPercentUp,
   animateIntroPage,
 } from './components/intro';
+import { spacebarGenerateColor } from './components/keydowns';
 import './components/dom';
 import {
   applyGeneratedColor,
@@ -30,63 +31,17 @@ const init = async () => {
   const hexSelector = document.querySelector<HTMLElement>(
     SELECTORS.HEX_SELECTOR,
   );
-  const codesElement = document.querySelector<HTMLElement>(
-    SELECTORS.CODES_SELECTOR,
-  );
   const copyButton = document.querySelector<HTMLButtonElement>(
     SELECTORS.COPY_BTN_SELECTOR,
   );
-  const eyebrowElement = document.querySelector<HTMLElement>(
-    SELECTORS.EYEBROW_SELECTOR,
-  );
-  const navLogoElement = document.querySelector<HTMLElement>(
-    SELECTORS.LOGO_SELECTOR,
-  );
-  const navIconElement = document.querySelector<HTMLElement>(
-    SELECTORS.NAV_GITHUB_SELECTOR,
-  );
 
   /* Apply start color for HEX and background */
-  if (
-    hexSelector &&
-    codesElement &&
-    eyebrowElement &&
-    generateBtnSelector &&
-    copyButton &&
-    navLogoElement &&
-    navIconElement
-  )
-    applyInitColor(
-      hexSelector,
-      codesElement,
-      eyebrowElement,
-      generateBtnSelector,
-      copyButton,
-      navLogoElement,
-      navIconElement,
-    );
+  applyInitColor();
 
   /* Generate colors onClick */
-  if (
-    generateBtnSelector &&
-    hexSelector &&
-    codesElement &&
-    eyebrowElement &&
-    eyebrowElement &&
-    copyButton &&
-    navLogoElement &&
-    navIconElement
-  ) {
+  if (generateBtnSelector) {
     generateBtnSelector.addEventListener('click', () => {
-      applyGeneratedColor(
-        hexSelector,
-        codesElement,
-        eyebrowElement,
-        generateBtnSelector,
-        copyButton,
-        navLogoElement,
-        navIconElement,
-      );
+      applyGeneratedColor();
     });
   }
 
@@ -156,6 +111,7 @@ const init = async () => {
 
   animateParallaxHand();
   animateDotsMousemove();
+  spacebarGenerateColor();
 
   return Promise.resolve();
 };

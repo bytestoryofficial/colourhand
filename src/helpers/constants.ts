@@ -21,3 +21,4 @@ export const DOTS_SELECTOR = '.bg-dots-base';
 export const DOTS_SPORTLIGHT_SELECTOR = '.bg-dots-spotlight';
 export const LOGO_SELECTOR = '#logo';
 export const NAV_GITHUB_SELECTOR = '#nav-github';
+export const HINT_SELECTOR = '#panel-hint';

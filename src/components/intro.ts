@@ -146,15 +146,29 @@ const animateIntroPage = async (
     return Promise.resolve();
   }
 
-  const panelFadeOut = animate(
-    panelRows,
-    { y: [16, 0], opacity: [0, 1] },
-    {
-      duration: 0.9,
-      delay: stagger(0.08, { startDelay: PANEL_DELAY_INTO_PHASE_2 }),
-      ease: [0.22, 1, 0.36, 1],
-    },
-  ).finished;
+  // custom opacity for hint
+  const FINAL_OPACITY_BY_ID: Record<string, number> = {
+    'panel-hint': 0.5,
+  };
+  const PANEL_STAGGER_STEP: number = 0.08;
+
+  const panelFadeOut = Promise.all(
+    panelRows.map((row: HTMLElement, index: number) => {
+      const finalOpacity: number = FINAL_OPACITY_BY_ID[row.id] ?? 1;
+      const finalDelay: number =
+        PANEL_DELAY_INTO_PHASE_2 + index * PANEL_STAGGER_STEP;
+
+      return animate(
+        row,
+        { y: [16, 0], opacity: [0, finalOpacity] },
+        {
+          duration: 0.9,
+          delay: finalDelay,
+          ease: [0.22, 1, 0.36, 1],
+        },
+      ).finished;
+    }),
+  );
 
   const dotsFade = animate(
     dotsElement,
