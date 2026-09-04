@@ -22,9 +22,11 @@ import {
 import * as SELECTORS from './helpers/constants';
 import type { HTMLElementNull } from './helpers/types';
 
-import './style.css';
-
 const init = async () => {
+  const supportsHover: boolean = window.matchMedia(
+    '(hover: hover) and (pointer: fine)',
+  ).matches;
+
   // ------------- HTML SELECTORS FOR WORK -------------
   const generateBtnSelector = document.querySelector<HTMLButtonElement>(
     SELECTORS.GENERATE_BTN_SELECTOR,
@@ -112,10 +114,13 @@ const init = async () => {
 
   await new Promise((resolve) => requestAnimationFrame(resolve));
 
-  animateParallaxHand();
-  animateDotsMousemove();
+  if (supportsHover) {
+    animateDotsMousemove();
+    animateParallaxHand();
+    animateGithubHover();
+  }
+
   spacebarGenerateColor();
-  animateGithubHover();
 
   return Promise.resolve();
 };
