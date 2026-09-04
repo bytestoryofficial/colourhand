@@ -1,6 +1,7 @@
-# colourhand
+# colourhand.
 
 **A simple interactive random color generator with spring animations · TypeScript · Motion · Bun**
+
 Generate a shade, watch it paint the whole scene in real time, copy HEX/RGB/HSL instantly.
 
 🔗 **Live:** [colourhand.com](https://colourhand.com)
