@@ -6,6 +6,8 @@ Generate a shade, watch it paint the whole scene in real time, copy HEX/RGB/HSL 
 
 🔗 **Live:** [colourhand.com](https://colourhand.com)
 
+![Colourhand preview](./docs/demo.gif)
+
 ## Features
 
 - 🎨 Random color generation with a curated HSL range (no muddy or blown-out shades)
