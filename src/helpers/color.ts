@@ -11,7 +11,7 @@ const toHexChannel = (value: number): string =>
 /**
  * @Function for converting HSL to HEX
  */
-const hslToHex = (
+export const hslToHex = (
   hue: number,
   saturation: number,
   lightness: number,
